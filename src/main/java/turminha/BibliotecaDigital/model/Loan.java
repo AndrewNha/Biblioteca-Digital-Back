@@ -17,11 +17,11 @@ public class Loan {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
     private LocalDate loanDate;
-    private LocalDate devolutionDate;
+    private LocalDate returnDate;
 
     @Enumerated(EnumType.STRING)
     private LoanStatus status;
@@ -30,12 +30,20 @@ public class Loan {
 
     }
 
-    public Loan(Long id, User user, Book book, LocalDate loanDate, LocalDate devolutionDate, LoanStatus status) {
+    public Loan(User user, Book book, LocalDate loanDate, LocalDate returnDate, LoanStatus status) {
+        this.user = user;
+        this.book = book;
+        this.loanDate = loanDate;
+        this.returnDate = returnDate;
+        this.status = status;
+    }
+
+    public Loan(Long id, User user, Book book, LocalDate loanDate, LocalDate returnDate, LoanStatus status) {
         this.id = id;
         this.user = user;
         this.book = book;
         this.loanDate = loanDate;
-        this.devolutionDate = devolutionDate;
+        this.returnDate = returnDate;
         this.status = status;
     }
 
@@ -71,12 +79,12 @@ public class Loan {
         this.loanDate = loanDate;
     }
 
-    public LocalDate getDevolutionDate() {
-        return devolutionDate;
+    public LocalDate getReturnDate() {
+        return returnDate;
     }
 
-    public void setDevolutionDate(LocalDate devolutionDate) {
-        this.devolutionDate = devolutionDate;
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
     }
 
     public LoanStatus getStatus() {
