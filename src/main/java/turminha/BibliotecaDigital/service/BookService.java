@@ -1,7 +1,6 @@
 package turminha.BibliotecaDigital.service;
 
 import org.springframework.stereotype.Service;
-import turminha.BibliotecaDigital.model.Author;
 import turminha.BibliotecaDigital.model.Book;
 import turminha.BibliotecaDigital.repository.BookRepository;
 
