@@ -2,9 +2,7 @@ package turminha.BibliotecaDigital.controller;
 
 import org.springframework.web.bind.annotation.*;
 import turminha.BibliotecaDigital.model.Book;
-import turminha.BibliotecaDigital.model.Loan;
 import turminha.BibliotecaDigital.service.BookService;
-import turminha.BibliotecaDigital.service.LoanService;
 
 import java.util.List;
 

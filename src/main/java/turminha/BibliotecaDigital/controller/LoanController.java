@@ -1,11 +1,9 @@
 package turminha.BibliotecaDigital.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import turminha.BibliotecaDigital.model.Loan;
 import turminha.BibliotecaDigital.service.LoanService;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -48,4 +46,9 @@ public class LoanController {
     //A unica responsabilidade dos controllers
     //é tankar o HTTP, por isso os
     //métodos tão meio vazios
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        loanService.delete(id);
+    }
 }

@@ -37,7 +37,8 @@ public class LoanService {
             throw new RuntimeException("No copies available for this book.");
         }
 
-        long activeLoans = loanRepository.countByUserAndStatus(loan.getUser(), LoanStatus.ACTIVE);
+        long activeLoans = loanRepository.countByUserAndStatus(loan.getUser(), LoanStatus.ACTIVE) +
+                           loanRepository.countByUserAndStatus(loan.getUser(), LoanStatus.LATE);
 
         if (activeLoans >= 3) {
             throw new RuntimeException("User already has 3 active loans.");
