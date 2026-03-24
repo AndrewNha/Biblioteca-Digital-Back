@@ -1,10 +1,10 @@
 package turminha.BibliotecaDigital.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("AUTHOR")
@@ -13,10 +13,17 @@ public class Author extends Person {
     @Column(nullable = false)
     private String nationality;
 
+    @ManyToMany(mappedBy = "authors")
+    private List<Book> booksWritten = new ArrayList<>();
+
     @Override
     public String getInfo() {
         return "Id: " + super.getId() + " / " + "Name: " + super.getName() + " / "
                 + "Nationality: " + this.nationality;
+    }
+
+    public Author(){
+
     }
 
     public Author(Long id, String name, String nationality) {

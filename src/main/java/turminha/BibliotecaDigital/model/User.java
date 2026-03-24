@@ -15,6 +15,8 @@ public class User extends Person {
 
     private String telephoneNumber;
 
+
+    @Override
     public String getInfo() {
         return "Id: " + super.getId() + " / " + "Name: " + super.getName() + " / "
                 + "E-mail: " + this.email + " / " + "Telephone number: "
