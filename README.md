@@ -40,6 +40,7 @@ src/
 
 # TODO
 
+- Gimmicks (Ex: Listar todos os atrasados)
 - Diagrama UML
 - Front-end maroto
 - Relatório
