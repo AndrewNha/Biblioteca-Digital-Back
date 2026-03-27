@@ -1,7 +1,9 @@
 package turminha.BibliotecaDigital.controller;
 
 import org.springframework.web.bind.annotation.*;
+import turminha.BibliotecaDigital.model.Book;
 import turminha.BibliotecaDigital.model.Loan;
+import turminha.BibliotecaDigital.model.User;
 import turminha.BibliotecaDigital.service.LoanService;
 
 import java.util.List;
@@ -19,6 +21,16 @@ public class LoanController {
     @GetMapping
     public List<Loan> getAll() {
         return loanService.getAll();
+    }
+
+    @GetMapping("/most-borrowed-book")
+    public Book mostBorrowedBook() {
+        return loanService.mostBorrowedBook();
+    }
+
+    @GetMapping("/most-active-user")
+    public User mostActiveUser() {
+        return loanService.mostActiveUser();
     }
 
     @PostMapping

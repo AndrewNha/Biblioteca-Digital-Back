@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 import turminha.BibliotecaDigital.enums.LoanStatus;
 import turminha.BibliotecaDigital.model.Book;
 import turminha.BibliotecaDigital.model.Loan;
+import turminha.BibliotecaDigital.model.User;
+import turminha.BibliotecaDigital.repository.BookRepository;
 import turminha.BibliotecaDigital.repository.LoanRepository;
+import turminha.BibliotecaDigital.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,9 +17,13 @@ import java.util.List;
 public class LoanService {
 
     private LoanRepository loanRepository;
+    private BookRepository bookRepository;
+    private UserRepository userRepository;
 
-    public LoanService(LoanRepository repository) {
-        this.loanRepository = repository;
+    public LoanService(LoanRepository loanRepository, BookRepository bookRepository, UserRepository userRepository) {
+        this.loanRepository = loanRepository;
+        this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
     }
 
     // Os services são responsáveis pelas regras de negócio
@@ -99,6 +106,38 @@ public class LoanService {
         loan.setStatus(loanUpdated.getStatus());
 
         return loanRepository.save(loan);
+    }
+
+    // Livro mais bombástico
+    public Book mostBorrowedBook() {
+        Book mostBorrowed = null;
+        long max = 0;
+
+        for (Book book : bookRepository.findAll()) {
+            long count = loanRepository.countByBook(book);
+            if (count > max) {
+                max = count;
+                mostBorrowed = book;
+            }
+        }
+
+        return mostBorrowed;
+    }
+
+    // Usuario mais bombástico
+    public User mostActiveUser() {
+        User mostActive = null;
+        long max = 0;
+
+        for (User user : userRepository.findAll()) {
+            long count = loanRepository.countByUser(user);
+            if (count > max) {
+                max = count;
+                mostActive = user;
+            }
+        }
+
+        return mostActive;
     }
 
     private boolean bookChanged(Loan loan, Loan loanUpdated) {
