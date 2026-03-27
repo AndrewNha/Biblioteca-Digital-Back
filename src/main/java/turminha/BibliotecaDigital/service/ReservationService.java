@@ -4,8 +4,12 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import turminha.BibliotecaDigital.enums.ReservationStatus;
 import turminha.BibliotecaDigital.model.Book;
+import turminha.BibliotecaDigital.model.Loan;
 import turminha.BibliotecaDigital.model.Reservation;
+import turminha.BibliotecaDigital.model.User;
+import turminha.BibliotecaDigital.repository.BookRepository;
 import turminha.BibliotecaDigital.repository.ReservationRepository;
+import turminha.BibliotecaDigital.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,9 +18,14 @@ import java.util.List;
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
+    private final BookRepository bookRepository;
+    private final UserRepository userRepository;
 
-    public ReservationService(ReservationRepository reservationRepository) {
+
+    public ReservationService(ReservationRepository reservationRepository, BookRepository bookRepository, UserRepository userRepository) {
         this.reservationRepository = reservationRepository;
+        this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
     }
 
     //LISTAR TODOS
@@ -24,21 +33,34 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
+    //LISTAR UM
+    public Reservation findById(Long id) {
+        return reservationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reservation not found."));
+    }
+
     //CRIAR - só permite reservar se não houver cópias disponíveis
     @Transactional
     public Reservation save(Reservation reservation) {
-        Book book = reservation.getBook();
+        Book book = bookRepository.findById(reservation.getBook().getId())
+                .orElseThrow(() -> new RuntimeException("Book not found."));
 
-        if (book.getQuantityAvailable() > 0) {
+        User user = userRepository.findById(reservation.getUser().getId())
+                .orElseThrow(() -> new RuntimeException("User not found."));
+
+        if (book.getQuantityAvailable() == null || book.getQuantityAvailable() > 0) {
             throw new RuntimeException("Book has copies available. Make a loan instead.");
         }
 
         // Usuário não pode reservar o mesmo livro duas vezes
         if (reservationRepository.existsByUserAndBookAndStatus(
-                reservation.getUser(), reservation.getBook(), ReservationStatus.PENDING)) {
+                user, book, ReservationStatus.PENDING)) {
             throw new RuntimeException("User already has a pending reservation for this book.");
         }
 
+        //Evitar livro e usuário fantasma, igual fiz no Loan
+        reservation.setBook(book);
+        reservation.setUser(user);
         reservation.setReservationDate(LocalDate.now());
         reservation.setStatus(ReservationStatus.PENDING);
 

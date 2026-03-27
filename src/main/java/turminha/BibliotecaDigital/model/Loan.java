@@ -1,11 +1,13 @@
 package turminha.BibliotecaDigital.model;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import turminha.BibliotecaDigital.enums.LoanStatus;
 
 import java.time.LocalDate;
 
 @Entity
+@JsonPropertyOrder({"id", "user", "book"})
 public class Loan {
 
     @Id

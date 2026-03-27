@@ -2,6 +2,7 @@ package turminha.BibliotecaDigital.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import turminha.BibliotecaDigital.model.Reservation;
 import turminha.BibliotecaDigital.model.User;
 import turminha.BibliotecaDigital.repository.UserRepository;
 
@@ -19,6 +20,12 @@ public class UserService {
     //LISTAR TODOS
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    //LISTAR UM
+    public User findById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found."));
     }
 
     //CRIAR

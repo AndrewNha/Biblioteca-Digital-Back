@@ -17,10 +17,10 @@ import java.util.List;
 @Service
 public class LoanService {
 
-    private LoanRepository loanRepository;
-    private BookRepository bookRepository;
-    private UserRepository userRepository;
-    private ReservationService reservationService;
+    private final LoanRepository loanRepository;
+    private final BookRepository bookRepository;
+    private final UserRepository userRepository;
+    private final ReservationService reservationService;
 
 
     public LoanService(LoanRepository loanRepository, BookRepository bookRepository, UserRepository userRepository, ReservationService reservationService) {
@@ -37,20 +37,30 @@ public class LoanService {
         return loanRepository.findAll();
     }
 
+    //LISTAR UM
+    public Loan findById(Long id) {
+        return loanRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Loan not found."));
+    }
+
     //CRIAR
     @Transactional
     public Loan save(Loan loan) {
-        Book book = loan.getBook();
+        Book book = bookRepository.findById(loan.getBook().getId())
+                .orElseThrow(() -> new RuntimeException("Book not found"));
+
+        User user = userRepository.findById(loan.getUser().getId())
+                .orElseThrow(() -> new RuntimeException("User not found."));
 
         //Esses throw é importante pq um null o controller n ia entender nada
         //O controller só entende HTTP, nesse caso das exceções "retorna"
         //Um bad request, ou seja, deu ruim fi
-        if (book.getQuantityAvailable() <= 0) {
+        if (book.getQuantityAvailable() == null || book.getQuantityAvailable() <= 0) {
             throw new RuntimeException("No copies available for this book.");
         }
 
-        long activeLoans = loanRepository.countByUserAndStatus(loan.getUser(), LoanStatus.ACTIVE) +
-                           loanRepository.countByUserAndStatus(loan.getUser(), LoanStatus.LATE);
+        long activeLoans = loanRepository.countByUserAndStatus(user, LoanStatus.ACTIVE) +
+                           loanRepository.countByUserAndStatus(user, LoanStatus.LATE);
 
         if (activeLoans >= 3) {
             throw new RuntimeException("User already has 3 active loans.");
@@ -58,6 +68,10 @@ public class LoanService {
 
         //Mais empréstimo -> Menos livro disponivel
         book.setQuantityAvailable(book.getQuantityAvailable() - 1);
+
+        //Evitar livro e usuário fantasma
+        loan.setBook(book);
+        loan.setUser(user);
 
         loan.setLoanDate(LocalDate.now());
         loan.setStatus(LoanStatus.ACTIVE);
