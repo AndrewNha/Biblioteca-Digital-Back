@@ -49,5 +49,6 @@ Esse é um projeto feito por estudantes do segundo semestre de Ciência da Compu
 # TODO
 
 - Diagrama UML
+- Corrigir bugs (são muitos)
 - Front-end maroto
 - Relatório
