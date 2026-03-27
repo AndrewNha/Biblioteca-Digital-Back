@@ -2,8 +2,12 @@ package turminha.BibliotecaDigital.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import turminha.BibliotecaDigital.enums.LoanStatus;
+import turminha.BibliotecaDigital.enums.ReservationStatus;
 import turminha.BibliotecaDigital.model.Reservation;
 import turminha.BibliotecaDigital.model.User;
+import turminha.BibliotecaDigital.repository.LoanRepository;
+import turminha.BibliotecaDigital.repository.ReservationRepository;
 import turminha.BibliotecaDigital.repository.UserRepository;
 
 import java.util.List;
@@ -11,10 +15,14 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final LoanRepository loanRepository;
+    private final ReservationRepository reservationRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, LoanRepository loanRepository, ReservationRepository reservationRepository) {
         this.userRepository = userRepository;
+        this.loanRepository = loanRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     //LISTAR TODOS
@@ -37,6 +45,22 @@ public class UserService {
     public void delete(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found."));
+
+        long activeLoans = loanRepository.countByUserAndStatus(user, LoanStatus.ACTIVE)
+                + loanRepository.countByUserAndStatus(user, LoanStatus.LATE);
+
+        boolean hasPendingReservation = reservationRepository.existsByUserAndStatus(user, ReservationStatus.PENDING);
+
+        //Correção de bug marota kkk AAAAAAAAAAAAAAAA
+        if (activeLoans > 0) {
+            throw new RuntimeException("Cannot delete user with active loans.");
+        }
+
+        //Correção de bug marota kkk AAAAAAAAAAAAAAAA
+        if (hasPendingReservation) {
+            throw new RuntimeException("Cannot delete user with pending reservations.");
+        }
+
         userRepository.delete(user);
     }
 
