@@ -12,6 +12,7 @@ public class AuthorService {
 
     private AuthorRepository authorRepository;
 
+    //Ao invés de utilizarmos @Autowired, só colocamos o construtor para injetar as dependencias
     public AuthorService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
