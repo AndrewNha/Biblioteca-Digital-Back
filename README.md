@@ -6,35 +6,43 @@ Esse é um projeto feito por estudantes do segundo semestre de Ciência da Compu
 
 ```
 .
-src/
-├── main/
-│   ├── java/turminha/BibliotecaDigital/
-│   │   ├── controller/
-│   │   │   ├── AuthorController.java
-│   │   │   ├── BookController.java
-│   │   │   ├── LoanController.java
-│   │   │   └── UserController.java
-│   │   ├── enums/
-│   │   │   └── LoanStatus.java
-│   │   ├── model/
-│   │   │   ├── Author.java
-│   │   │   ├── Book.java
-│   │   │   ├── Loan.java
-│   │   │   ├── Person.java
-│   │   │   └── User.java
-│   │   ├── repository/
-│   │   │   ├── AuthorRepository.java
-│   │   │   ├── BookRepository.java
-│   │   │   ├── LoanRepository.java
-│   │   │   └── UserRepository.java
-│   │   ├── service/
-│   │   │   ├── AuthorService.java
-│   │   │   ├── BookService.java
-│   │   │   ├── LoanService.java
-│   │   │   └── UserService.java
-│   │   └── BibliotecaDigitalApplication.java
-│   └── resources/
-│       └── application.yml
+├── src/
+│   ├── main/
+│   │   ├── java/turminha/BibliotecaDigital/
+│   │   │   ├── controller/
+│   │   │   │   ├── AuthorController.java
+│   │   │   │   ├── BookController.java
+│   │   │   │   ├── LoanController.java
+│   │   │   │   ├── ReservationController.java
+│   │   │   │   └── UserController.java
+│   │   │   ├── service/
+│   │   │   │   ├── AuthorService.java
+│   │   │   │   ├── BookService.java
+│   │   │   │   ├── LoanService.java
+│   │   │   │   ├── ReservationService.java
+│   │   │   │   └── UserService.java
+│   │   │   ├── repository/
+│   │   │   │   ├── AuthorRepository.java
+│   │   │   │   ├── BookRepository.java
+│   │   │   │   ├── LoanRepository.java
+│   │   │   │   ├── ReservationRepository.java
+│   │   │   │   └── UserRepository.java
+│   │   │   ├── model/
+│   │   │   │   ├── Author.java
+│   │   │   │   ├── Book.java
+│   │   │   │   ├── Loan.java
+│   │   │   │   ├── Person.java
+│   │   │   │   ├── Reservation.java
+│   │   │   │   └── User.java
+│   │   │   ├── enums/
+│   │   │   │   ├── LoanStatus.java
+│   │   │   │   └── ReservationStatus.java
+│   │   │   └── BibliotecaDigitalApplication.java
+│   │   └── resources/
+│   │       └── application.yml
+│   └── test/
+│       └── java/turminha/BibliotecaDigital/
+│           └── BibliotecaDigitalApplicationTests.java
 └── pom.xml
 ```
 
