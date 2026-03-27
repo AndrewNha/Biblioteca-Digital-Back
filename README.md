@@ -46,7 +46,7 @@ Esse é um projeto feito por estudantes do segundo semestre de Ciência da Compu
 └── pom.xml
 ```
 # Diagramação UML
-<img width="902" height="910" alt="NovidadeEmBreve drawio" src="https://github.com/user-attachments/assets/c328b6a4-8535-47d4-a831-c798e7819682" />
+<img width="901" height="910" alt="NovidadeEmBreve drawio(1)" src="https://github.com/user-attachments/assets/6e5849ba-df4f-4a2f-a2ad-e8750f0a143b" />
 
 # TODO
 
