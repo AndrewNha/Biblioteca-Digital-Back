@@ -45,6 +45,8 @@ Esse é um projeto feito por estudantes do segundo semestre de Ciência da Compu
 │           └── BibliotecaDigitalApplicationTests.java
 └── pom.xml
 ```
+# Diagramação UML
+<img width="902" height="910" alt="NovidadeEmBreve drawio" src="https://github.com/user-attachments/assets/c328b6a4-8535-47d4-a831-c798e7819682" />
 
 # TODO
 
