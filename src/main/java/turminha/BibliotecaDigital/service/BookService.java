@@ -1,5 +1,6 @@
 package turminha.BibliotecaDigital.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import turminha.BibliotecaDigital.model.Book;
 import turminha.BibliotecaDigital.repository.BookRepository;
@@ -33,6 +34,7 @@ public class BookService {
     }
 
     //UPDATE
+    @Transactional
     public Book update(Long id, Book bookUpdated) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Book not found."));

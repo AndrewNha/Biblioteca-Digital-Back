@@ -1,6 +1,7 @@
 package turminha.BibliotecaDigital.service;
 
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import turminha.BibliotecaDigital.enums.LoanStatus;
 import turminha.BibliotecaDigital.model.Book;
@@ -19,11 +20,14 @@ public class LoanService {
     private LoanRepository loanRepository;
     private BookRepository bookRepository;
     private UserRepository userRepository;
+    private ReservationService reservationService;
 
-    public LoanService(LoanRepository loanRepository, BookRepository bookRepository, UserRepository userRepository) {
+
+    public LoanService(LoanRepository loanRepository, BookRepository bookRepository, UserRepository userRepository, ReservationService reservationService) {
         this.loanRepository = loanRepository;
         this.bookRepository = bookRepository;
         this.userRepository = userRepository;
+        this.reservationService = reservationService;
     }
 
     // Os services são responsáveis pelas regras de negócio
@@ -34,6 +38,7 @@ public class LoanService {
     }
 
     //CRIAR
+    @Transactional
     public Loan save(Loan loan) {
         Book book = loan.getBook();
 
@@ -61,6 +66,7 @@ public class LoanService {
     }
 
     //RETORNAR EMPRÉSTIMO
+    @Transactional
     public Loan returnBook(Long id) {
         Loan loan = loanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Loan not found."));
@@ -69,15 +75,20 @@ public class LoanService {
             throw new RuntimeException("This loan is already closed.");
         }
 
-        // Livro volta
-        loan.getBook().setQuantityAvailable(loan.getBook().getQuantityAvailable() + 1);
         loan.setStatus(LoanStatus.RETURNED);
+
+        boolean hadReservation = reservationService.completeNextReservation(loan.getBook());
+
+        if (!hadReservation) {
+            loan.getBook().setQuantityAvailable(loan.getBook().getQuantityAvailable() + 1);
+        }
 
         return loanRepository.save(loan);
     }
 
 
     //DELETAR
+    @Transactional
     public void delete(Long id) {
         Loan loan = loanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Loan not found."));
@@ -90,6 +101,8 @@ public class LoanService {
     }
 
     //UPDATE
+
+    @Transactional
     public Loan update(Long id, Loan loanUpdated) {
         Loan loan = loanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Loan not found."));
