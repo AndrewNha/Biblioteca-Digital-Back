@@ -1,11 +1,13 @@
 package turminha.BibliotecaDigital.model;
 
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "person_role")
+@JsonPropertyOrder({"id", "name"})
 public abstract class Person {
 
     @Id

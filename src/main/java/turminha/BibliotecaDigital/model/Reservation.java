@@ -1,11 +1,13 @@
 package turminha.BibliotecaDigital.model;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import turminha.BibliotecaDigital.enums.ReservationStatus;
 
 import java.time.LocalDate;
 
 @Entity
+@JsonPropertyOrder({"id"})
 public class Reservation {
 
     @Id

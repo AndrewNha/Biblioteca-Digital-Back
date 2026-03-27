@@ -21,6 +21,12 @@ public class AuthorController {
         return authorService.getAll();
     }
 
+    @GetMapping("/{id}")
+    //LISTAR UM
+    public Author findById(@PathVariable Long id) {
+        return authorService.findById(id);
+    }
+
     @PostMapping
     public Author create(@RequestBody Author author) {
         return authorService.save(author);

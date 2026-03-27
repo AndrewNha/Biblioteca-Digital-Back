@@ -1,6 +1,7 @@
 package turminha.BibliotecaDigital.controller;
 
 import org.springframework.web.bind.annotation.*;
+import turminha.BibliotecaDigital.model.Author;
 import turminha.BibliotecaDigital.model.User;
 import turminha.BibliotecaDigital.service.UserService;
 
@@ -16,9 +17,16 @@ public class UserController {
         this.userService = service;
     }
 
+    //LISTAR TODOS
     @GetMapping
     public List<User> getAll() {
         return userService.getAll();
+    }
+
+    //LISTAR UM
+    @GetMapping("/{id}")
+    public User findById(@PathVariable Long id) {
+        return userService.findById(id);
     }
 
     @PostMapping

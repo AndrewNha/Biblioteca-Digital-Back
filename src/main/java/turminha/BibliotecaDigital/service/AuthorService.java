@@ -21,6 +21,12 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
+    //LISTAR UM
+    public Author findById(Long id) {
+        return authorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Author not found."));
+    }
+
     //CRIAR
     public Author save(Author author) {
         return authorRepository.save(author);

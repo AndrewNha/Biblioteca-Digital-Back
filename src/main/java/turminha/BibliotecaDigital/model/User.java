@@ -10,7 +10,6 @@ import jakarta.persistence.Table;
 @DiscriminatorValue("USER")
 public class User extends Person {
 
-    @Column(nullable = false)
     private String email;
 
     private String telephoneNumber;

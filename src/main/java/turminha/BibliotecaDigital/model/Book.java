@@ -1,5 +1,6 @@
 package turminha.BibliotecaDigital.model;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@JsonPropertyOrder({"id"})
 public class Book {
 
     @Id
