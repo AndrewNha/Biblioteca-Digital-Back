@@ -1,5 +1,6 @@
 package turminha.BibliotecaDigital.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import turminha.BibliotecaDigital.model.Author;
 import turminha.BibliotecaDigital.repository.AuthorRepository;
@@ -33,6 +34,7 @@ public class AuthorService {
     }
 
     //UPDATE
+    @Transactional
     public Author update(Long id, Author authorUpdated) {
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Author not found."));

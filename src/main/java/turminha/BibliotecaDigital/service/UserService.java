@@ -1,5 +1,6 @@
 package turminha.BibliotecaDigital.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import turminha.BibliotecaDigital.model.User;
 import turminha.BibliotecaDigital.repository.UserRepository;
@@ -33,6 +34,7 @@ public class UserService {
     }
 
     //UPDATE
+    @Transactional
     public User update(Long id, User userUpdated) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found."));
