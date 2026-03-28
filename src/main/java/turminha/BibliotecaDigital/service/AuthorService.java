@@ -37,6 +37,11 @@ public class AuthorService {
     public void delete(Long id) {
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Author not found."));
+
+        if (!author.getBooksWritten().isEmpty()) {
+            throw new RuntimeException("Cannot delete author with books associated. Remove the author from all books first.");
+        }
+
         authorRepository.delete(author);
     }
 

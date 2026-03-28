@@ -11,6 +11,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     //Isso é para impedir que um usuário seja deletado com uma reserva pendente (outro bug cara q ÓDIO meu irmao)
     boolean existsByUserAndStatus(User user, ReservationStatus status);
 
+    //Impedir livro de ser deletado com reserva / empréstimo
+    boolean existsByBookAndStatus(Book book, ReservationStatus status);
+
     //Verficar para impedir de um usuário reservar o mesmo livro 2x
     boolean existsByUserAndBookAndStatus(User user, Book book, ReservationStatus status);
 

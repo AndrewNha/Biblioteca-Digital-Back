@@ -115,8 +115,22 @@ public class ReservationService {
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Reservation not found."));
 
-        reservation.setUser(reservationUpdated.getUser());
-        reservation.setBook(reservationUpdated.getBook());
+        User user = userRepository.findById(reservationUpdated.getUser().getId())
+                .orElseThrow(() -> new RuntimeException("User not found."));
+
+        Book book = bookRepository.findById(reservationUpdated.getBook().getId())
+                .orElseThrow(() -> new RuntimeException("Book not found."));
+
+        boolean bookOrUserChanged = !reservation.getBook().getId().equals(book.getId())
+                || !reservation.getUser().getId().equals(user.getId());
+
+        if (bookOrUserChanged && reservationRepository.existsByUserAndBookAndStatus(
+                user, book, ReservationStatus.PENDING)) {
+            throw new RuntimeException("User already has a pending reservation for this book.");
+        }
+
+        reservation.setUser(user);
+        reservation.setBook(book);
         reservation.setReservationDate(reservationUpdated.getReservationDate());
         reservation.setStatus(reservationUpdated.getStatus());
 
