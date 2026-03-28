@@ -108,7 +108,13 @@ public class LoanService {
                 .orElseThrow(() -> new RuntimeException("Loan not found."));
 
         if (loan.getStatus() == LoanStatus.ACTIVE || loan.getStatus() == LoanStatus.LATE) {
-            loan.getBook().setQuantityAvailable(loan.getBook().getQuantityAvailable() + 1);
+            //MAIS BUG HAHAHAHAHAHAHHAHAHAHHAHAHAHAHAHHAHAHAHHAHAHA
+            boolean hadReservation = reservationService.completeNextReservation(loan.getBook());
+
+            if (!hadReservation) {
+                loan.getBook().setQuantityAvailable(loan.getBook().getQuantityAvailable() + 1);
+            }
+
         }
 
         loanRepository.delete(loan);
@@ -122,9 +128,41 @@ public class LoanService {
                 .orElseThrow(() -> new RuntimeException("Loan not found."));
 
         if (bookChanged(loan, loanUpdated) && wasActive(loan)) {
+            Book book = bookRepository.findById(loanUpdated.getBook().getId())
+                    .orElseThrow(() -> new RuntimeException("Book not found."));
+
+            if (book.getQuantityAvailable() <= 0) {
+                throw new RuntimeException("No copies available for this book.");
+            }
+
             returnCopy(loan.getBook());
-            borrowCopy(loanUpdated.getBook());
+            borrowCopy(book);
+            loanUpdated.setBook(book);
+
+        } else if (bookChanged(loan, loanUpdated) && !wasActive(loan)){
+                throw new RuntimeException("Cannot change the book of a returned loan.");
+        } else {
+            loanUpdated.setBook(loan.getBook());
         }
+
+        if (userChanged(loan, loanUpdated)) {
+            User user = userRepository.findById(loanUpdated.getUser().getId())
+                    .orElseThrow(() -> new RuntimeException("User not found."));
+
+            long activeLoans = loanRepository.countByUserAndStatus(user, LoanStatus.ACTIVE)
+                    + loanRepository.countByUserAndStatus(user, LoanStatus.LATE);
+
+            if (activeLoans >= 3) {
+                throw new RuntimeException("User already has 3 active loans.");
+            }
+
+            loanUpdated.setUser(user);
+
+        } else {
+            loanUpdated.setUser(loan.getUser());
+        }
+
+
 
         loan.setUser(loanUpdated.getUser());
         loan.setBook(loanUpdated.getBook());
@@ -185,5 +223,9 @@ public class LoanService {
     private void borrowCopy(Book book) {
         book.setQuantityAvailable(book.getQuantityAvailable() - 1);
         //Diminui a quantidade disponivel do livro atualizado (novo)
+    }
+
+    private boolean userChanged(Loan loan, Loan loanUpdated) {
+        return !loan.getUser().getId().equals(loanUpdated.getUser().getId());
     }
 }

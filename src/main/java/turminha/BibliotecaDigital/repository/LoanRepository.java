@@ -17,4 +17,6 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
 
     //Metodo para descobrirmos os usuarios mais serelepes
     long countByUser(User user);
+
+    long countByBookAndStatus(Book book, LoanStatus status);
 }
