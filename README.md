@@ -9,7 +9,7 @@
 
 <h3>Diagrama UML</h3>
 
-<img width="901" height="910" alt="NovidadeEmBreve drawio(1)" src="https://github.com/user-attachments/assets/6e5849ba-df4f-4a2f-a2ad-e8750f0a143b" />
+<img width="901" height="910" alt="uml" src="https://github.com/user-attachments/assets/af626093-6b57-40b4-9795-013bcdff8869" />
 
 <h3>Descrição do modelo</h3>
 
