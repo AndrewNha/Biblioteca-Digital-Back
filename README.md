@@ -14,7 +14,7 @@
 <h3>Descrição do modelo</h3>
 
 <p>O sistema foi modelado utilizando os princípios da Orientação a Objetos, com as seguintes classes principais:</p>
-<p>`Person` — classe abstrata que serve como base para Author e User, aplicando o conceito de herança. Ambas as subclasses herdam os atributos id e name, e implementam o método abstrato `getInfo()` , que, surpreendemente, pode ser visualizado no momento de uma requisição `POST`, aplicando o conceito de polimorfismo. </p>
+<p> `Person` — classe abstrata que serve como base para Author e User, aplicando o conceito de herança. Ambas as subclasses herdam os atributos id e name, e implementam o método abstrato `getInfo()` , que, surpreendemente, pode ser visualizado no momento de uma requisição `POST`, aplicando o conceito de polimorfismo. </p>
 <p> `Author` — representa um autor do acervo, com atributo `nationality` e uma lista de livros escritos. Possui uma associação ManyToMany bidirecional com Book. Entretanto, no sistema, ele deve ser criado antes de Book, pois um Book precisa ter um autor que o escreveu.</p> 
 <p> `User` — representa um usuário da biblioteca, com atributos `email` e `telephoneNumber`. Pode ter múltiplos empréstimos e reservas associados. </p>
 <p> `Book` — representa um livro do acervo, com atributos de `name`, `gender`, `publisher`, `releaseDate`, `quantity` e `quantityAvailable`, além de possuir uma lista de autores. Todo livro pode ter sido escrito por mais de um autor. </p>
