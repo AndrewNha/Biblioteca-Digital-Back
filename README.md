@@ -64,3 +64,41 @@ O sistema foi modelado utilizando os princípios da Orientação a Objetos, com 
 │           └── BibliotecaDigitalApplicationTests.java
 └── pom.xml
 ```
+
+<h3>Arquitetura</h3>
+
+O projeto seguiu a seguinte arquitetura em camadas:
+
+- `model` — entidades JPA que representam o domínio do sistema
+- `repository` — interfaces que estendem JpaRepository, responsáveis pelo acesso ao banco de dados
+- `service` — classes responsáveis pelas regras de negócio
+- `controller` — classes responsáveis por receber as requisições HTTP e delegar ao service correspondente
+- `enums` — enumerações que representam os possíveis estados de empréstimos e reservas
+- `config` — configurações da aplicação, como o CORS
+
+# 3 . Ferramentas Utilizadas
+
+<h3>Back-end</h3>
+- Linguagem: Java
+- Framework: Spring, utilizando Spring Boot, responsável pela criação da API REST, injeção de dependências e gerenciamento do ciclo do vida do sistema
+- Spring Data JPA: criação de queries através de convenções de nomenclatura de métodos
+- Hibernate: mapeamento entre as classes Java e as tabelas do banco de dados
+- Banco de dados: PostgresSQL
+- IDE: IntelliJ IDEA
+- Gerenciador de dependências: Maven
+
+<h3>[Front-end](https://github.com/AndrewNha/Biblioteca-Digital-Front)</h3>
+- Linguagem: TypeScript/JavaScript
+- Framework: React.js com Vite
+- TailwindCSS
+- IDE: Visual Studio Code
+
+# 4 . Considerações finais
+
+O sistema desenvolvido atende aos requisitos propostos, oferecendo um CRUD completo para todas as entidades (livros, autores, usuários, empréstimos e reservas) com todas as regras de negócio devidamente implementadas e validadas. O front-end consome a API REST através de requisições HTTP e exibe as mensagens de erro retornadas pelo back-end de forma legível ao usuário.<br><br>
+
+A principal dificuldade encontrada pela equipe foi a curva de aprendizado do Spring Boot, visto que nenhum dos integrantes possuía experiência prévia com o framework nem com os conceitos de HTTP e arquitetura REST. A integração entre o front-end e o back-end também representou um desafio, especialmente no que diz respeito à configuração do CORS e ao formato correto dos dados enviados nas requisições.<br><br>
+
+Em relação à linguagem Java e ao paradigma de Orientação a Objetos, a equipe avaliou positivamente a experiência. Ficou evidente que o POO é especialmente útil em aplicações de maior escala, onde a organização em classes, a reutilização de código através da herança e a separação de responsabilidades tornam o sistema mais fácil de manter e evoluir. O desenvolvimento deste projeto contribuiu de forma significativa para a compreensão prática desses conceitos, que muitas vezes são abordados apenas de forma teórica.<br><br>
+
+Como sugestão para a disciplina, seria interessante a apresentação, pelo menos superficialmente, de frameworks como o Spring, pois é o modo que o Java é utilizado na vida real nas corporações. Ademais, outro motivo da apresentação de frameworks ser um tópico válido é devido ao fato de que a transição do Java puro para um ambiente com tantas abstrações e convenções representa um salto considerável para quem está aprendendo.<br><br>
