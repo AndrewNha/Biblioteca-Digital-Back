@@ -95,9 +95,9 @@ O projeto seguiu a seguinte arquitetura em camadas:
 
 # 4 . Considerações finais
 
-O sistema desenvolvido atende aos requisitos propostos, oferecendo um CRUD completo para todas as entidades (livros, autores, usuários, empréstimos e reservas) com todas as regras de negócio devidamente implementadas e validadas. O front-end consome a API REST através de requisições HTTP e exibe as mensagens de erro retornadas pelo back-end de forma legível ao usuário.<br><br>
+O sistema desenvolvido atende aos requisitos propostos, oferecendo um CRUD completo para todas as entidades (livros, autores, usuários, empréstimos e reservas) com todas as regras de negócio devidamente implementadas e validadas. O front-end consome a API REST através de requisições HTTP e exibe as mensagens de erro retornadas pelo back-end de forma legível ao usuário.<br>
 
-A principal dificuldade encontrada pela equipe foi a curva de aprendizado do Spring Boot, visto que nenhum dos integrantes possuía experiência prévia com o framework nem com os conceitos de HTTP e arquitetura REST. A integração entre o front-end e o back-end também representou um desafio, especialmente no que diz respeito à configuração do CORS e ao formato correto dos dados enviados nas requisições.<br><br>
+A principal dificuldade encontrada pela equipe foi a curva de aprendizado do Spring Boot, visto que nenhum dos integrantes possuía experiência prévia com o framework nem com os conceitos de HTTP e arquitetura REST. A integração entre o front-end e o back-end também representou um desafio, especialmente no que diz respeito à configuração do CORS e ao formato correto dos dados enviados nas requisições.<br>
 
 Em relação à linguagem Java e ao paradigma de Orientação a Objetos, a equipe avalia positivamente a experiência. Ficou evidente que o POO é especialmente útil em aplicações de maior escala, onde a organização em classes, a reutilização de código através da herança e a separação de responsabilidades tornam o sistema mais fácil de manter e evoluir. O desenvolvimento deste projeto contribuiu de forma significativa para a compreensão prática desses conceitos, que muitas vezes são abordados apenas de forma teórica. Nesse sentido, a apresentação de Java, para nós que nunca haviamos tido contato anteriormente, foi excelente, isso devido à excelente didática do nosso professor Gabriel Belarmino<br><br>
 
