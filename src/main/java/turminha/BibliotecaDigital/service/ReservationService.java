@@ -131,8 +131,16 @@ public class ReservationService {
 
         reservation.setUser(user);
         reservation.setBook(book);
-        reservation.setReservationDate(reservationUpdated.getReservationDate());
-        reservation.setStatus(reservationUpdated.getStatus());
+
+        //Bug corrigido
+        if (reservationUpdated.getReservationDate() != null) {
+            reservation.setReservationDate(reservationUpdated.getReservationDate());
+        }
+
+        //Bug corrigido
+        if (reservationUpdated.getStatus() != null) {
+            reservation.setStatus(reservationUpdated.getStatus());
+        }
 
         return reservationRepository.save(reservation);
     }
