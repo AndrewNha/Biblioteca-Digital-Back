@@ -78,8 +78,8 @@ O projeto seguiu a seguinte arquitetura em camadas:
 
 # 3 . Ferramentas Utilizadas
 
-<h3>Back-end</h3>
-- Linguagem: Java
+<h3>Back-end</h3><br>
+- Linguagem: Java<br>
 - Framework: Spring, utilizando Spring Boot, responsável pela criação da API REST, injeção de dependências e gerenciamento do ciclo do vida do sistema
 - Spring Data JPA: criação de queries através de convenções de nomenclatura de métodos
 - Hibernate: mapeamento entre as classes Java e as tabelas do banco de dados
@@ -87,7 +87,7 @@ O projeto seguiu a seguinte arquitetura em camadas:
 - IDE: IntelliJ IDEA
 - Gerenciador de dependências: Maven
 
-<h3>[Front-end](https://github.com/AndrewNha/Biblioteca-Digital-Front)</h3>
+<h3>[Front-end](https://github.com/AndrewNha/Biblioteca-Digital-Front)</h3><br>
 - Linguagem: TypeScript/JavaScript
 - Framework: React.js com Vite
 - TailwindCSS
