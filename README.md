@@ -1,10 +1,12 @@
 # 1 . Introdução
-<h3>Projeto Sistema de Biblioteca Digital</h3>
+<h3>Projeto Sistema de Biblioteca Digital - ReadMaxxing</h3>
 
 Alunos:
 - André N.<br>
 - Gabriela Marques<br>
 - Arthur Farias<br>
+
+<hr>
 
 O presente projeto consiste no desenvolvimento de um sistema de biblioteca digital denominado “<b>ReadMaxxing</b>”, cujo objetivo é gerenciar o acervo de livros, autores, usuários, empréstimos e reservas de uma biblioteca.<br><br>
 O problema central abordado é a necessidade de controlar de forma organizada e segura o fluxo de empréstimos e reservas de livros, garantindo que regras de negócio, como o limite de três empréstimos ativos por usuário e a impossibilidade de reservar um livro com cópias disponíveis, sejam respeitadas. Ademais, o objetivo central do projeto é o controle de integridade entre as entidades do sistema, isto é, garantir que os relacionamentos estejam válidos e sem contradições.<br><br>
