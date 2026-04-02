@@ -3,8 +3,8 @@
 
 Alunos:
 - André N.<br>
-- Gabriela Marques<br>
-- Arthur Farias<br>
+- Gabriela Marques Mangueira<br>
+- Arthur Farias de Albuquerque<br>
 
 <hr>
 
@@ -21,7 +21,7 @@ O sistema foi desenvolvido com uma arquitetura cliente-servidor, onde o back-end
 <h3>Descrição do modelo</h3>
 
 O sistema foi modelado utilizando os princípios da Orientação a Objetos, com as seguintes classes principais:<br><br>
-- `Person` — classe abstrata que serve como base para Author e User, aplicando o conceito de herança. Ambas as subclasses herdam os atributos id e name, e implementam o método abstrato `getInfo()` , que, surpreendemente, pode ser visualizado no momento de uma requisição `POST`, aplicando o conceito de polimorfismo. <br>
+- `Person` — classe abstrata que serve como base para Author e User, aplicando o conceito de <b>herança</b>. Ambas as subclasses herdam os atributos id e name, e implementam o método abstrato `getInfo()` , que, surpreendemente, pode ser visualizado no momento de uma requisição `POST`, aplicando o conceito de <b>polimorfismo</b>. <br>
 - `Author` — representa um autor do acervo, com atributo `nationality` e uma lista de livros escritos. Possui uma associação ManyToMany bidirecional com Book. Entretanto, no sistema, ele deve ser criado antes de Book, pois um Book precisa ter um autor que o escreveu.<br>
 - `User` — representa um usuário da biblioteca, com atributos `email` e `telephoneNumber`. Pode ter múltiplos empréstimos e reservas associados. <br>
 - `Book` — representa um livro do acervo, com atributos de `name`, `gender`, `publisher`, `releaseDate`, `quantity` e `quantityAvailable`, além de possuir uma lista de autores. Todo livro pode ter sido escrito por mais de um autor.<br>
@@ -78,7 +78,7 @@ O projeto seguiu a seguinte arquitetura em camadas:
 
 - `model` — entidades JPA que representam o domínio do sistema
 - `repository` — interfaces que estendem JpaRepository, responsáveis pelo acesso ao banco de dados
-- `service` — classes responsáveis pelas regras de negócio
+- `service` — classes responsáveis pelas regras de negócio, lançando <b>exceções</b> em casos de erro
 - `controller` — classes responsáveis por receber as requisições HTTP e delegar ao service correspondente
 - `enums` — enumerações que representam os possíveis estados de empréstimos e reservas
 - `config` — configurações da aplicação, como o CORS
