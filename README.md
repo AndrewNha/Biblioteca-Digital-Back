@@ -14,12 +14,12 @@ O sistema foi desenvolvido com uma arquitetura cliente-servidor, onde o back-end
 <h3>Descrição do modelo</h3>
 
 O sistema foi modelado utilizando os princípios da Orientação a Objetos, com as seguintes classes principais:<br><br>
-`Person` — classe abstrata que serve como base para Author e User, aplicando o conceito de herança. Ambas as subclasses herdam os atributos id e name, e implementam o método abstrato `getInfo()` , que, surpreendemente, pode ser visualizado no momento de uma requisição `POST`, aplicando o conceito de polimorfismo. <br>
-`Author` — representa um autor do acervo, com atributo `nationality` e uma lista de livros escritos. Possui uma associação ManyToMany bidirecional com Book. Entretanto, no sistema, ele deve ser criado antes de Book, pois um Book precisa ter um autor que o escreveu.<br>
-`User` — representa um usuário da biblioteca, com atributos `email` e `telephoneNumber`. Pode ter múltiplos empréstimos e reservas associados. <br>
-`Book` — representa um livro do acervo, com atributos de `name`, `gender`, `publisher`, `releaseDate`, `quantity` e `quantityAvailable`, além de possuir uma lista de autores. Todo livro pode ter sido escrito por mais de um autor.<br>
-`Loan` — representa um empréstimo, associando um User a um Book com um status (`ACTIVE`, `RETURNED`, `LATE`) e datas de empréstimo e devolução. <br>
-`Reservation` — representa uma reserva, associando um User a um Book com um status (`PENDING`, `COMPLETED`, `CANCELLED`) e data de reserva.<br>
+- `Person` — classe abstrata que serve como base para Author e User, aplicando o conceito de herança. Ambas as subclasses herdam os atributos id e name, e implementam o método abstrato `getInfo()` , que, surpreendemente, pode ser visualizado no momento de uma requisição `POST`, aplicando o conceito de polimorfismo. <br>
+- `Author` — representa um autor do acervo, com atributo `nationality` e uma lista de livros escritos. Possui uma associação ManyToMany bidirecional com Book. Entretanto, no sistema, ele deve ser criado antes de Book, pois um Book precisa ter um autor que o escreveu.<br>
+- `User` — representa um usuário da biblioteca, com atributos `email` e `telephoneNumber`. Pode ter múltiplos empréstimos e reservas associados. <br>
+- `Book` — representa um livro do acervo, com atributos de `name`, `gender`, `publisher`, `releaseDate`, `quantity` e `quantityAvailable`, além de possuir uma lista de autores. Todo livro pode ter sido escrito por mais de um autor.<br>
+- `Loan` — representa um empréstimo, associando um User a um Book com um status (`ACTIVE`, `RETURNED`, `LATE`) e datas de empréstimo e devolução. <br>
+- `Reservation` — representa uma reserva, associando um User a um Book com um status (`PENDING`, `COMPLETED`, `CANCELLED`) e data de reserva.<br>
 
 <h3>Estrutura atual do projeto</h3>
 
